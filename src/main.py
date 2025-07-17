@@ -28,19 +28,15 @@ def validate_fsa029(sample_path, schema_folder):
     try:
         #if data conforms to schema, then print a success message and return True
         if fsa_schema.validate(sample_text):
-            print("The data and schema match")
+            print("The data is valid.")
             return True
         else:
             #else statement will causes exception to raise
             fsa_schema.assertValid(sample_text)
     #return failure message and if validation fails
     except etree.DocumentInvalid as invalid_error:
-        print("The data and schema do not match")
+        print("The data is invalid.")
         raise invalid_error
-    #catch other errors
-    except Exception as error:
-        print("There has been an error")
-        raise error
         
         
         
