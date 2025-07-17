@@ -48,9 +48,9 @@ Then we are ready to run the tests. This is done with the following:
 pytest -vv --testdox
 ```
 
-With a successful output that looks like:
+A successful output looks like:
 
-```bash
+```
 test/test_main.py                                                                                                                                                                                                            
 Class for tests that check the
 integrity of the schema files.
@@ -75,7 +75,7 @@ passes the valid sample file
 
 ## Using the main Script
 
-The main script is located in <code>src/main.py</code>. The main useable component is a function called validate_fsa029. This function inputs a schema folder and sample data, and outputs either a success or error message.
+The main script is located in <code>src/main.py</code>. The main useable component is a function called validate_fsa029. This function inputs a schema folder and sample data, and outputs either a success or error message if the data is valid or not.
 
 To use this script/function, run the following:
 
@@ -95,6 +95,24 @@ This points to where the error is located in the xml file.
 
 
 ## The Extra Mile
+
+What causes it to fail schema validation? Why do you think the regulator has
+included a valid file in their examples?
+
+- The failure of the FSA029-Sample-Full.xml file to conform to the schema is caused by the Capital segment.
+- The Capital segment takes a choice of three entries. IncorporatedEntities, PartnershipsSoleTraders or LLPs. This means that only one of these entries can be chosen to be under the capitals section.
+- The full sample data has all three of the options under the Capital segment, and this is the cause of the error.
+
+- The regulator has included a valid file in their examples so that a user can verify the behavior of the schema. When developing tests regarding this schema, a developer can easily develop a test which ensures that the schema works for valid data samples.
+
+
+How would you fix the file to pass the schema validation?
+
+- One way to fix the full sample data to pass validation would be to only choose one of the three sections under Capital (IncorporatedEntities, PartnershipsSoleTraders or LLPs) and delete the rest. This would respect the choice argument given to the Capital section and cause this error to be fixed.
+
+Why do you think the regulator has included an invalid file in their examples?
+
+- By providing a passing and failing data set, it helps developers with testing and understanding schemas. A failing data set helped this situation by giving a specific error and showing where the data set failed. This helps developers to understand the different types of errors and check the validity of the schema.
 
 
 
