@@ -55,4 +55,4 @@ if __name__ == "__main__":
     
     
     print(validate_fsa029(sample_valid, schema_folder))
-    print(validate_fsa029(sample_full, schema_folder))
+    #print(validate_fsa029(sample_full, schema_folder))
