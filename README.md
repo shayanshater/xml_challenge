@@ -4,14 +4,13 @@ In this document, we will walk through setting up, testing and running the xml_c
 
 
 ## Setup
-
-To begin, open your terminal and change directory to your desired location. e.g: 
+To begin, open your terminal(bash) and change directory to your desired location. e.g:
 
 ```bash
 cd Desktop/Code
 ```
 
-This will take you to the Code folder inside of Desktop. Once you are in the desired location, clone this repo using
+This will take you to the `Code` folder inside of Desktop. Once you are in the desired location, clone this repo using
 
 ```bash
 git clone https://github.com/shayanshater/xml_challenge
@@ -103,12 +102,16 @@ included a valid file in their examples?
 - The Capital segment takes a choice of three entries. IncorporatedEntities, PartnershipsSoleTraders or LLPs. This means that only one of these entries can be chosen to be under the capitals section.
 - The full sample data has all three of the options under the Capital segment, and this is the cause of the error.
 
-- The regulator has included a valid file in their examples so that a user can verify the behavior of the schema. When developing tests regarding this schema, a developer can easily develop a test which ensures that the schema works for valid data samples.
+- The regulator has included a valid file in their examples so that a user can verify the behavior of the schema. When developing tests regarding this schema, a developer can easily develop a test which ensures that the schema works for valid data samples. It also shows that the schema behaves as is expected and is not faulty.
 
 
 How would you fix the file to pass the schema validation?
 
 - One way to fix the full sample data to pass validation would be to only choose one of the three sections under Capital (IncorporatedEntities, PartnershipsSoleTraders or LLPs) and delete the rest. This would respect the choice argument given to the Capital section and cause this error to be fixed.
+
+- However, if you may wish to keep all of the data and redesign the schema, this could be a better option to keep all of the data instead of deleting it. It can be simply done by replacing the `<choice>` block with a `<sequence>` block and giving each of the three options the arguments of `< ... minOccurs="0" maxOccurs="1">` but giving IncorporatedEntities `< ... minOccurs="1" maxOccurs="1">`.  This makes sure that you can have maximum three unique inputs, with IncorporatedEntities being a must. 
+
+- Both methods make the full data valid. However it depends on if one may wish to edit the sample data and delete inputs, or edit the schema and keep the inputs. 
 
 Why do you think the regulator has included an invalid file in their examples?
 

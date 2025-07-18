@@ -68,7 +68,7 @@ class TestSchemaDocs:
             
 @pytest.mark.describe("""Class for checking that the script 
                       passes the valid sample file""")
-class TestValidSampleData:
+class TestSampleData:
     @pytest.mark.it("""A test to check if the valid 
                     sample data conforms to the given 
                     schema as it should""")
