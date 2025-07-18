@@ -22,7 +22,7 @@ Then change directory into this repo:
 cd xml_challenge
 ```
 
-And we are ready to setup the python requirements! Start by creating a virtual environment and installing the requirements into it
+And we are ready to setup the python requirements (make sure you python installed)! Start by creating a virtual environment and installing the requirements into it
 
 
 ```bash
