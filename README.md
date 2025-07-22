@@ -76,6 +76,8 @@ passes the valid sample file
 
 The main script is located in <code>src/main.py</code>. The main useable component is a function called validate_fsa029. This function inputs a schema folder and sample data, and outputs either a success or error message if the data is valid or not.
 
+The script is independent of the schema folder location, so this means that it can be placed anywhere within this repo and the script will work. What is important is that the correct path of the schema folder and sample data is passed to the function.
+
 To use this script/function, run the following:
 
 ```bash
