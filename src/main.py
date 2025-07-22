@@ -27,13 +27,19 @@ def validate_fsa029(sample_path, schema_folder):
     for path in schema_paths:
         if "FSA029-Schema.xsd" in path:
             fsa_schema_path = schema_folder + '/' + path
+        else:
+            commontypes_schema_path =  schema_folder + '/' + path
+
+    os.mkdir("CommonTypes")
+    os.mkdir("CommonTypes\\v14")
+    temporary_commontypes_schema_path = "CommonTypes/v14/CommonTypes-Schema.xsd"
+    os.rename(commontypes_schema_path, temporary_commontypes_schema_path)          
             
             
     #formulating schema object       
     with open(fsa_schema_path) as fsa_schema_file:
-        fsa_schema_doc = etree.parse(fsa_schema_file)
+        fsa_schema_doc = etree.parse(fsa_schema_file)    
     fsa_schema = etree.XMLSchema(fsa_schema_doc)
-     
      
     #forming a xml object   
     with open(sample_path) as sample_file:
@@ -53,6 +59,12 @@ def validate_fsa029(sample_path, schema_folder):
     except etree.DocumentInvalid as invalid_error:
         print("The data is invalid.")
         raise invalid_error
+    finally:
+        os.rename(temporary_commontypes_schema_path, commontypes_schema_path)
+        os.rmdir("CommonTypes\\v14")
+        os.rmdir("CommonTypes")
+        
+        
         
         
         
@@ -63,7 +75,7 @@ def validate_fsa029(sample_path, schema_folder):
 if __name__ == "__main__":
     sample_valid = "data/FSA029-Sample-Valid.xml"
     sample_full = "data/FSA029-Sample-Full.xml"
-    schema_folder = "CommonTypes/v14"
+    schema_folder = "Schemas/fsa"
     
     
     print(validate_fsa029(sample_valid, schema_folder))
